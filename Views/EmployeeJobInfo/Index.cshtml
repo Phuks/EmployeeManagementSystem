@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.EmployeeJobInfoVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestingEmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnviromentSatisfaction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobInvolvement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobSatisfaction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformanceRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkLifeBalance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestingEmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnviromentSatisfaction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobInvolvement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobSatisfaction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerformanceRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkLifeBalance)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

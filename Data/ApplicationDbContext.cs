@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using EmployeeManagementSystem.Models;
 
 namespace EmployeeManagementSystem.Data
 {
@@ -17,5 +18,6 @@ namespace EmployeeManagementSystem.Data
         public DbSet<EmployeeJobInfo> EmployeesJobInformation { get; set; }
         public DbSet<EmployeeWages> EmployeesEarnings { get; set; }
         public DbSet<EmployeeHistory> EmployeeHistories { get; set; }
+        public DbSet<EmployeeManagementSystem.Models.EmployeeJobInfoVM> EmployeeJobInfoVM { get; set; }
     }
 }
