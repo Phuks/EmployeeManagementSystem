@@ -46,15 +46,30 @@ namespace EmployeeManagementSystem.Controllers
         // POST: EmployeeJobInfoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(EmployeeJobInfoVM model)
         {
             try
             {
+                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var empJobInfo = _mapper.Map<EmployeeJobInfo>(model);
+
+                var isSuccess = _repo.Create(empJobInfo);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "There is a fault somewhere...");
+                    return View(model);
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "There is a fault somewhere...");
+                return View(model);
             }
         }
 
