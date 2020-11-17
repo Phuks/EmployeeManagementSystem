@@ -34,7 +34,13 @@ namespace EmployeeManagementSystem.Controllers
         // GET: EmployeeJobInfoController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if (!_repo.isExists(id))
+            {
+                return NotFound();
+            }
+            var empJobInfo = _repo.FindById(id);
+            var model = _mapper.Map<EmployeeJobInfoVM>(empJobInfo);
+            return View(model);
         }
 
         // GET: EmployeeJobInfoController/Create
@@ -50,7 +56,7 @@ namespace EmployeeManagementSystem.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                // TODO: Adding insert logic here
                 if (!ModelState.IsValid)
                 {
                     return View(model);
@@ -92,7 +98,7 @@ namespace EmployeeManagementSystem.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                // TODO: Adding update logic here
                 if (!ModelState.IsValid)                // Validating the data
                 {
                     return View(model);
@@ -116,21 +122,56 @@ namespace EmployeeManagementSystem.Controllers
         // GET: EmployeeJobInfoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            /*if (!_repo.isExists(id))
+            {
+                return NotFound();
+            }
+            var empJobInfo = _repo.FindById(id);
+            var model = _mapper.Map<EmployeeJobInfoVM>(empJobInfo);
+            return View(model);*/
+
+            var empJobInfo = _repo.FindById(id);
+
+            if (empJobInfo == null)
+            {
+                return NotFound();
+            }
+
+            var isSuccess = _repo.Delete(empJobInfo);
+
+            if (!isSuccess)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: EmployeeJobInfoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, EmployeeJobInfoVM model)
         {
             try
             {
+                // TODO: Adding delete logic here
+                var empJobInfo = _repo.FindById(id);
+
+                if (empJobInfo == null)
+                {
+                    return NotFound();
+                }
+
+                var isSuccess = _repo.Delete(empJobInfo);
+
+                if (!isSuccess)
+                {
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
     }
