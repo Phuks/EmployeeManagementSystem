@@ -44,6 +44,12 @@ namespace EmployeeManagementSystem.Repository
             throw new NotImplementedException();
         }
 
+        public bool isExists(int id)
+        {
+            var exists = _db.EmployeesJobInformation.Any(q => q.Id == id);
+            return exists;
+        }
+
         public bool Save()              //Returns how many records have beeb edited
         {
            var changes = _db.SaveChanges();

@@ -76,21 +76,40 @@ namespace EmployeeManagementSystem.Controllers
         // GET: EmployeeJobInfoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_repo.isExists(id))
+            {
+                return NotFound();
+            }
+            var empJobInfo = _repo.FindById(id);
+            var model = _mapper.Map<EmployeeJobInfoVM>(empJobInfo);
+            return View(model);
         }
 
         // POST: EmployeeJobInfoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EmployeeJobInfoVM model)
         {
             try
             {
+                // TODO: Add update logic here
+                if (!ModelState.IsValid)                // Validating the data
+                {
+                    return View(model);
+                }
+                var empJobInfo = _mapper.Map<EmployeeJobInfo>(model);           // Mapping from ViewModel to Data class and storing in variable
+                var isSuccess = _repo.Update(empJobInfo);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "There is a fault somewhere...");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "There is a fault somewhere...");
+                return View(model);
             }
         }
 
