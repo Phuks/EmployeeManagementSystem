@@ -10,6 +10,10 @@ namespace EmployeeManagementSystem.Models
     public class EmployeeWagesVM
     {
         public int Id { get; set; }
+        public EmployeeVM Employee { get; set; }
+        public string EmployeeId { get; set; }
+        public EmployeeJobInfoVM EmployeeJobInfo { get; set; }
+        public int EmployeeJobInfoId { get; set; }
         [Required]
         public int MonthlyIncome { get; set; }
         [Required]
@@ -22,11 +26,7 @@ namespace EmployeeManagementSystem.Models
         public string Overtime { get; set; }
         [Required]
         public int PercentSalaryHike { get; set; }
-        public EmployeeVM Employee { get; set; }
-        public string EmployeeId { get; set; }
-        public EmployeeJobInfoVM EmployeeJobInfo { get; set; }
-        public int EmployeeJobInfoId { get; set; }
-
+       
         public IEnumerable<SelectListItem> Employees { get; set; }
         public IEnumerable<SelectListItem> EmployeesJobInfo { get; set; }
     }
