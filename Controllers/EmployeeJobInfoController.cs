@@ -6,11 +6,13 @@ using AutoMapper;
 using EmployeeManagementSystem.Data;
 using EmployeeManagementSystem.Interfaces;
 using EmployeeManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementSystem.Controllers
 {
+    [Authorize(Roles ="Admin")]                 // Authorizing only Admin users that are logged in to avoid maliciousness  
     public class EmployeeJobInfoController : Controller
     {
         // Dependency Injection referencing one object and implying its dependencies
@@ -30,7 +32,7 @@ namespace EmployeeManagementSystem.Controllers
             var model = _mapper.Map <List<EmployeeJobInfo>, List<EmployeeJobInfoVM>>(empJobInfo);
             return View(model);
         }
-
+        //[Authorize(Roles = "Employee")]
         // GET: EmployeeJobInfoController/Details/5
         public ActionResult Details(int id)
         {

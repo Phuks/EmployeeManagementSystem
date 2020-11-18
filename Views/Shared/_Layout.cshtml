@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,18 +30,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Create Employee</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item text-dark" href="#">Employee Wages </a>
-                                <a class="dropdown-item text-dark" asp-controller="Employee JobInfo" asp-action="Index">Employee Info</a>
-                                <a class="dropdown-item text-dark" href="#">Employee History</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-dark" href="#">Employee</a>
-                            </div>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manage
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-dark" href="#">Employee Wages</a>
+                                        <a class="dropdown-item text-dark" asp-controller="EmployeeJobInfo" asp-action="Index">Employee Info</a>
+                                        <a class="dropdown-item text-dark" href="#">Employee History</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-dark" href="#">Employee</a>
+                                    </div>
+                                </li>
+                            }
+
+                        }
                     </ul>
                 </div>
             </div>
