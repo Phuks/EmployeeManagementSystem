@@ -20,14 +20,14 @@ namespace EmployeeManagementSystem.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;            // Key in helping functions interact with the user database and user data
-        private readonly UserManager<IdentityUser> _userManager;                // Key in helping functions interact with the user database and user data
+        private readonly SignInManager<Employee> _signInManager;            // Key in helping functions interact with the user database and user data
+        private readonly UserManager<Employee> _userManager;                // Key in helping functions interact with the user database and user data
         private readonly ILogger<RegisterModel> _logger;                        // Keeps track of what is happening at what point
         private readonly IEmailSender _emailSender;                             
 
         public RegisterModel(                                                   // Constructor: Initializing Dependencies - Dependency Injection
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Employee> userManager,
+            SignInManager<Employee> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -87,7 +87,7 @@ namespace EmployeeManagementSystem.Areas.Identity.Pages.Account
             {
                 var user = new Employee { UserName = Input.Email, Email = Input.Email, 
                     Firstname = Input.FirstName, 
-                    Lastname = Input.LastName  };                                           //Remember Employee extends IdentityUser
+                    Lastname = Input.LastName  };                                           //Remember Employee extends Employee
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

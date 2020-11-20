@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagementSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201114203023_AddedLeaveDetailsTables")]
-    partial class AddedLeaveDetailsTables
+    [Migration("20201119120226_AddedStandardHoursAttributeToEmployeeWagesTable")]
+    partial class AddedStandardHoursAttributeToEmployeeWagesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,9 +81,6 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.Property<int>("EmployeeNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("EnviromentSatisfaction")
-                        .HasColumnType("int");
-
                     b.Property<int>("JobInvolvement")
                         .HasColumnType("int");
 
@@ -96,14 +93,8 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.Property<int>("JobSatisfaction")
                         .HasColumnType("int");
 
-                    b.Property<int>("PerformanceRating")
-                        .HasColumnType("int");
-
                     b.Property<string>("RequestingEmployeeId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("WorkLifeBalance")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -143,6 +134,9 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.Property<int>("PercentSalaryHike")
                         .HasColumnType("int");
 
+                    b.Property<int>("StandardHours")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
@@ -150,6 +144,104 @@ namespace EmployeeManagementSystem.Data.Migrations
                     b.HasIndex("EmployeeJobInfoId");
 
                     b.ToTable("EmployeesEarnings");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeJobInfoVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobInvolvement")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("JobRole")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobSatisfaction")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RequestingEmployeeId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RequestingEmployeeId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestingEmployeeId1");
+
+                    b.ToTable("EmployeeJobInfoVM");
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Attrition")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BusinessTravel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistanceFromHome")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Education")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EducationField")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaritalStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Over18")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -424,6 +516,13 @@ namespace EmployeeManagementSystem.Data.Migrations
                         .HasForeignKey("EmployeeJobInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EmployeeManagementSystem.Models.EmployeeJobInfoVM", b =>
+                {
+                    b.HasOne("EmployeeManagementSystem.Models.EmployeeVM", "RequestingEmployee")
+                        .WithMany()
+                        .HasForeignKey("RequestingEmployeeId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

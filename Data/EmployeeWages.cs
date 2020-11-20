@@ -21,9 +21,11 @@ namespace EmployeeManagementSystem.Data
         public int MonthlyRate { get; set; }
         public int DailyRate { get; set; }
         public int HourlyRate { get; set; }
+        public int StandardHours { get; set; }
         public string Overtime { get; set; }
         public int PercentSalaryHike { get; set; }
-        
+        //public int Period { get; set; }
+
     }
 
 }

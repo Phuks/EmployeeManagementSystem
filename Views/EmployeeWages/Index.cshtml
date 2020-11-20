@@ -1,0 +1,48 @@
+﻿@model EmployeeManagementSystem.Models.CreateEmployeeWagesVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table id="tblData" class="table">
+    <thead>
+        <tr>
+            <th>
+                Departments
+            </th>
+
+            @* <th>
+                Roles
+                </th>*@
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EmployeeJobInfos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.JobRole)
+                    </td>*@
+                <td>
+                    <!--<a asp-action="Edit" asp-route-id="item.Id">Edit</a>-->
+                    @*@Html.ActionLink("Pay Employees", "SetWage", new { id = item.Id }, new { @class = "btn btn-success" })*@
+                    <!--For each Department/Role type we are going to bind that Id-->
+                    <!--Html.ActionLink("Allocate to Employees", "SetRole", new { id = item.Id })-->
+                    <a class="btn btn-outline-success" asp-action="SetWage" asp-route-id="@item.Id">
+                        <i class="fa fa-money" aria-hidden="true"></i> Pay Employees
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

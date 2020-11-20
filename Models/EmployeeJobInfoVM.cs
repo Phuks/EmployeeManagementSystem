@@ -20,9 +20,6 @@ namespace EmployeeManagementSystem.Models
         public int EmployeeCount { get; set; }
         [Required]
         public string Department { get; set; }
-        /*[Required]
-        [Display(Name = "Enviroment_Satisfaction")]
-        public int EnviromentSatisfaction { get; set; }*/
         [Required]
         [Display(Name = "Job_Role")]
         public string JobRole { get; set; }
@@ -36,11 +33,20 @@ namespace EmployeeManagementSystem.Models
         [Display(Name = "Job_Satisfaction")]
         public int JobSatisfaction { get; set; }
         /*[Required]
+        [Display(Name = "Enviroment_Satisfaction")]
+        public int EnviromentSatisfaction { get; set; }*/
+        /*[Required]
         [Display(Name = "Performance_Rating")]
         public int PerformanceRating { get; set; }
         [Required]
         [Display(Name = "Work_Life_Balance")]
         public int WorkLifeBalance { get; set; }*/
     }
+
+    /*public class CreateEmployeeWagesVM
+    {
+        public int NumberUpdated { get; set; }
+        public List<EmployeeJobInfoVM> EmployeeJobInfos { get; set; }
+    }*/
 
 }

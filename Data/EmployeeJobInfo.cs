@@ -18,11 +18,12 @@ namespace EmployeeManagementSystem.Data
         public int EmployeeNumber { get; set; }
         public int EmployeeCount { get; set; }
         public string Department { get; set; }
-        // public int EnviromentSatisfaction { get; set; }
         public string JobRole { get; set; }
         public int JobInvolvement { get; set; }
         public int JobLevel { get; set; }
         public int JobSatisfaction { get; set; }
+        //public DateTime DateCreated { get; set; }
+        // public int EnviromentSatisfaction { get; set; }
         // public int PerformanceRating { get; set; }
         // public int WorkLifeBalance { get; set; }
     }

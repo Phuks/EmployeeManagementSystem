@@ -23,12 +23,27 @@ namespace EmployeeManagementSystem.Models
         [Required]
         public int HourlyRate { get; set; }
         [Required]
+        public int StandardHours { get; set; }
+        [Required]
         public string Overtime { get; set; }
         [Required]
         public int PercentSalaryHike { get; set; }
        
-        public IEnumerable<SelectListItem> Employees { get; set; }
-        public IEnumerable<SelectListItem> EmployeesJobInfo { get; set; }
+        /*public IEnumerable<SelectListItem> Employees { get; set; }
+        public IEnumerable<SelectListItem> EmployeesJobInfo { get; set; }*/
+    }
+
+    public class CreateEmployeeWagesVM
+    {
+        public int NumberUpdated { get; set; }
+        public List<EmployeeJobInfoVM> EmployeeJobInfos { get; set; }
+    }
+
+    public class ViewEmployeeWagesVM
+    {
+        public EmployeeVM Employee { get; set; }
+        public string EmployeeId { get; set; }
+        public List<EmployeeWagesVM> EmployeeWages { get; set; }
     }
 
 }

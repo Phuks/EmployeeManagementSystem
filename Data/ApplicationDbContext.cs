@@ -19,5 +19,6 @@ namespace EmployeeManagementSystem.Data
         public DbSet<EmployeeWages> EmployeesEarnings { get; set; }
         public DbSet<EmployeeHistory> EmployeeHistories { get; set; }
         public DbSet<EmployeeManagementSystem.Models.EmployeeJobInfoVM> EmployeeJobInfoVM { get; set; }
+        public DbSet<EmployeeManagementSystem.Models.EmployeeVM> EmployeeVM { get; set; }
     }
 }

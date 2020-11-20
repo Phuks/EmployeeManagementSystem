@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Data;
 using EmployeeManagementSystem.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,14 @@ namespace EmployeeManagementSystem.Repository
             _db = db;
         }
 
+        public bool CheckAllocation(int empjobinfoid, string employeeid)
+        {
+            var monthlyincome = int.MaxValue;
+            return FindAll()
+                .Where(q => q.EmployeeId == employeeid && q.EmployeeJobInfoId == empjobinfoid && q.MonthlyIncome == monthlyincome)
+                .Any();
+        }
+
         public bool Create(EmployeeWages entity)
         {
             _db.EmployeesEarnings.Add(entity);
@@ -30,7 +39,7 @@ namespace EmployeeManagementSystem.Repository
 
         public ICollection<EmployeeWages> FindAll()
         {
-            var empWages = _db.EmployeesEarnings.ToList();
+            var empWages = _db.EmployeesEarnings.Include(q => q.EmployeeJobInfo).ToList();
             return empWages;
         }
 
@@ -43,6 +52,14 @@ namespace EmployeeManagementSystem.Repository
         public ICollection<EmployeeWages> GetEmployeesByEmployeeWages(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public ICollection<EmployeeWages> GetEmployeeWagesByEmployee(string id)
+        {
+            var monthlyincome = int.MaxValue;
+            return FindAll()
+                .Where(q => q.EmployeeId == id && q.MonthlyIncome == monthlyincome)
+                .ToList();
         }
 
         public bool isExists(int id)
